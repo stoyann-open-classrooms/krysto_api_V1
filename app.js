@@ -56,7 +56,15 @@ app.put('/api/krysto/users/:id', (req,res) => {
   res.json(success(message,userUpdated))
 })
 
-// Suppresion d'un uttilisateur
+// Suppresion d'un uttilisateur ===> a revoir status  200 mais pas de supression ??
+app.delete(`/api/krysto/users/:id`, (req,res) => {
+  const id = parseInt(req.params.id)
+  const userDeleted = users.find(user => user.id === id)
+  users.filter(user => user.id != id)
+  const message = ` l'uttilisateur ${userDeleted.username} a bien été supprimé`
+  res.json(success(message,userDeleted))
+  
+})
 
 
 // Ecoute de l'application sur le port 3000
