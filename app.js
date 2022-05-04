@@ -2,19 +2,46 @@
 
 const express = require('express')
 const morgan = require('morgan')
-// const favicon = require('serve-favicon')
+// const favicon = require('serve-favicon')  => TODO = erreur en console quand ce middlewares est executer
 const bodyParser = require('body-parser')
-
+const{ Sequelize} = require('sequelize')
 const { success, getUniqueId } = require('./helper.js')
 let users = require('./mock-user')
 const app = express()
 const port = 3000
 
 
+// =========================== Connexion a la base de données  ===========================
+const sequelize = new Sequelize (
+    'krysto_bd_v1',
+    'root',
+    'root',
+    {
+        host:'localhost',
+        dialect: 'mariadb',
+        dialectOptions: {
+            timezone:"Etc/GMT+11"
+
+        },
+        logging: false
+    }
+)
+
+sequelize.authenticate()
+.then(console.log("🌞🌞 BRAVO !  La connexion  a la base de données c'est correctement etablie🌞🌞"))
+.catch(error =>  console.log(`❌ Impossible de ce connecter a la base de donées \n ⚠️\n  ${error}\n ⚠️\n`))
+
+// ========================== ========================== ==========================
+
+
+
+
 // middlewares qui affichent en console les requete entrante dans l'api rest
 // app.use.use(favicon(__dirname,  './favicon_krysto.ico'))
 app.use(morgan('dev'))
+
 app.use(bodyParser.json())
+
 
 
 
