@@ -4,35 +4,42 @@ const express = require('express')
 const morgan = require('morgan')
 // const favicon = require('serve-favicon')  => TODO = erreur en console quand ce middlewares est executer
 const bodyParser = require('body-parser')
-const{ Sequelize} = require('sequelize')
+const{ Sequelize, DataTypes} = require('sequelize')
 const { success, getUniqueId } = require('./helper.js')
 let users = require('./mock-user')
+const userModel = require('./src/models/user')
 const app = express()
 const port = 3000
 
 
-// =========================== Connexion a la base de données  ===========================
-const sequelize = new Sequelize (
-    'krysto_bd_v1',
-    'root',
-    'root',
-    {
-        host:'localhost',
-        dialect: 'mariadb',
-        dialectOptions: {
-            timezone:"Etc/GMT+11"
+// // =========================== Connexion a la base de données  ===========================
+// const sequelize = new Sequelize (
+//     'krysto_bd_v1',
+//     // 'test_krysto',
+//     'root',
+//     'root',
+//     {
+//         host:'localhost',
+//         dialect: 'mariadb',
+//         dialectOptions: {
+//             timezone:"Etc/GMT+11"
 
-        },
-        logging: false
-    }
-)
+//         },
+//         logging: false
+//     }
+// )
 
-sequelize.authenticate()
-.then(console.log("🌞🌞 BRAVO !  La connexion  a la base de données c'est correctement etablie🌞🌞"))
-.catch(error =>  console.log(`❌ Impossible de ce connecter a la base de donées \n ⚠️\n  ${error}\n ⚠️\n`))
+// sequelize.authenticate()
+// .then(console.log("🌞🌞 BRAVO !  La connexion  a la base de données c'est correctement etablie🌞🌞"))
+// .catch(error =>  console.log(`❌ Impossible de ce connecter a la base de donées \n ⚠️\n  ${error}\n ⚠️\n`))
 
-// ========================== ========================== ==========================
+// // ========================== synchronisation avec la base de données et le modele krysto ==========================
 
+// sequelize.sync({force:true})
+// .then(_ => {
+//   console.log(`La base de données " "krysto_bd_v1" a bien étè synchroniser`)
+ 
+// })
 
 
 
