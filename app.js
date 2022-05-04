@@ -45,6 +45,18 @@ app.post('/api/krysto/users/', (req,res) => {
   res.json(success(message,userCreated))
 })
 
+//Modification d'un uttiilisateur
+app.put('/api/krysto/users/:id', (req,res) => {
+  const id = parseInt(req.params.id)
+  const userUpdated = { ...req.body, id:id}
+  users = users.map(user => {
+    return user.id === id ? userUpdated : user
+  })
+  const message = `L'uttilisateur ${userUpdated} a bien été modifié.`
+  res.json(success(message,userUpdated))
+})
+
+// Suppresion d'un uttilisateur
 
 
 // Ecoute de l'application sur le port 3000
