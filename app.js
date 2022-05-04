@@ -2,14 +2,19 @@
 
 const express = require('express')
 const morgan = require('morgan')
-const { success } = require('./helper.js')
+// const favicon = require('serve-favicon')
+const bodyParser = require('body-parser')
+
+const { success, getUniqueId } = require('./helper.js')
 let users = require('./mock-user')
 const app = express()
 const port = 3000
 
 
 // middlewares qui affichent en console les requete entrante dans l'api rest
+// app.use.use(favicon(__dirname,  './favicon_krysto.ico'))
 app.use(morgan('dev'))
+app.use(bodyParser.json())
 
 
 
@@ -31,8 +36,14 @@ app.get(`/api/krysto/users/:id`,( req, res) => {
     res.json(success(message, user)) 
 })
 
-
-
+// Création d'un nouvel uttilisateur
+app.post('/api/krysto/users/', (req,res) => {
+  const id = getUniqueId(users)
+  const userCreated = {...req.body, ...{id: id, created: new Date()}}
+  users.push(userCreated)
+  const message = `L'uttilisateur ${userCreated.username}`
+  res.json(success(message,userCreated))
+})
 
 
 

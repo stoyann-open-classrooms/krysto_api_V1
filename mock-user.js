@@ -104,7 +104,7 @@ const users = [
         username: "Alain",
         email: 'alain-nc@hotmail.com',
         pwd: 'azerty',
-        picture: "./personnas/personna_11.png",
+        picture: "./personnas/personna_13.png",
         created: new Date()
        },
    
