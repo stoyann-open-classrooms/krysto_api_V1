@@ -99,6 +99,15 @@ const users = [
         created: new Date()
        },
    
+    {
+        id: 13,
+        username: "Alain",
+        email: 'alain-nc@hotmail.com',
+        pwd: 'azerty',
+        picture: "./personnas/personna_11.png",
+        created: new Date()
+       },
+   
    ];
      
    module.exports = users
